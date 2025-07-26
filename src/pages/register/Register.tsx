@@ -22,7 +22,7 @@ export default function Register() {
         event.preventDefault();
         event.stopPropagation();
 
-        const formData = Object.fromEntries(new FormData(formRef.current).entries());
+        const formData = Object.fromEntries(new FormData(formRef.current as HTMLFormElement).entries());
         console.log(formData);
 
         if (!Object.keys(formData).every((key) => {

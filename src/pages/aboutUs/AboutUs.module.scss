@@ -1,4 +1,6 @@
 @use "../../global.module.scss" as *;
+@use 'sass:list';
+@use 'sass:math';
 
 .aboutUsPage {
     position: relative;
@@ -18,7 +20,7 @@
     .aboutUsTitle {
         @for $letterIndex from 1 through 8 {
             span:nth-child(#{$letterIndex}) {
-                $color: nth($titleColors, random(length($titleColors)));
+                $color: list.nth($titleColors, math.random(list.length($titleColors)));
                 color: $color;
                 // filter: drop-shadow(0px 0px 10px $color);
             }
@@ -28,7 +30,7 @@
     .contactUsTitle {
         @for $letterIndex from 1 through 10 {
             span:nth-child(#{$letterIndex}) {
-                $color: nth($titleColors, random(length($titleColors)));
+                $color: list.nth($titleColors, math.random(list.length($titleColors)));
                 color: $color;
                 // filter: drop-shadow(0px 0px 10px $color);
             }
