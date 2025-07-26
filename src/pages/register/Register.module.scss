@@ -1,0 +1,301 @@
+@use "../../global.module.scss" as *;
+
+.registerPage {
+    position: relative;
+    min-height: 100vh;
+    background-color: #000000;
+
+    .registerForm {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+
+        .bandInfo, .contactInfo {
+            padding: 54px;
+
+            .infoTitle {
+                text-align: center;
+                font-family: $paraFont;
+                color: white;
+                font-weight: normal;
+                margin-top: 0px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .bandInfo {
+            background-color: #000000;
+            background-image: url("./images/register/bg-dust.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+
+            .bandNameContainer {
+                position: relative;
+                input {
+                    position: relative;
+                    width: calc(100% - 28px);
+                    background-color: #ffffff2d;
+                    border: 2px solid white;
+                    font-family: $bandNameFont;
+                    color: rgb(224, 224, 224);
+                    padding: 12px;
+                    font-size: 1rem;
+                    font-weight: lighter;
+                }
+
+                span {
+                    position: absolute;
+                    width: 18px;
+                    height: 18px;
+                    background-image: url("./images/register/lightening.png");
+                    background-size: 18px 18px;
+
+                    &:nth-of-type(1) {
+                        left: 0px;
+                        top: 100%;
+                        transform: translateX(calc(-100% + 2px)) translateY(-2px);
+                    }
+                    &:nth-of-type(2) {
+                        left: 100%;
+                        top: 100%;
+                        transform: translateX(-2px) translateY(-2px) rotateY(180deg);
+                    }
+                    &:nth-of-type(3) {
+                        left: 0px;
+                        top: 0%;
+                        transform: translateX(calc(-100% + 2px)) translateY(calc(-100% + 2px)) rotateX(180deg);
+                    }
+                    &:nth-of-type(4) {
+                        left: 100%;
+                        top: 0%;
+                        transform: translateX(-2px) translateY(calc(-100% + 2px)) rotateZ(180deg);
+                    }
+                }
+            }
+
+            .venueContainer {
+                margin-top: auto;
+
+                .venueTitle {
+                    color: $primaryColor;
+                    font-family: $paraFont;
+                    font-size: 1.2rem;
+                }
+
+                .venueSelectContainer {
+                    display: flex;
+                    gap: 45px 36px;
+                    flex-wrap: wrap;
+
+                    .venueSelectWrapper {
+                        input {
+                            display: none;
+
+                            &:checked + label {
+                                &:before {
+                                    opacity: 1;
+                                    transform: translate(-50%, calc(-100% - 3px));
+                                }
+                                
+                                &:after {
+                                    opacity: 1;
+                                    transform: translate(-50%, 3px);
+                                }
+
+                                span {
+                                    opacity: 1;
+                                    &:nth-of-type(1) {transform: translateX(-1px) translateY(-100%);}
+                                    &:nth-of-type(2) {transform: translateY(-1px) rotateZ(90deg);}
+                                    &:nth-of-type(3) {transform: translateX(calc(-100% + 1px)) rotateZ(180deg);}
+                                    &:nth-of-type(4) {transform: translate(-100%, calc(-100% + 1px)) rotateZ(-90deg);}
+                                }
+                            }
+                        }
+                        label {
+                            position: relative;
+                            color: $primaryColor;
+                            font-family: $paraFont;
+                            font-size: 0.9rem;
+                            border: 2px solid red;
+                            padding: 6px 27px;
+                            transition: all 0.3s;
+                            text-transform: capitalize;
+
+                            &:hover {
+                                background-color: #ff000039;
+                            }
+
+                            &:before, &:after {
+                                content: '';
+                                opacity: 0;
+                                height: 0px;
+                                width: 0px;
+                                position: absolute;
+                                border-left: 10px solid transparent;
+                                border-right: 10px solid transparent;
+                            }
+                            
+                            &:before {
+                                border-bottom: 10px solid red;
+                                left: 50%;
+                                top: 0px;
+                                transition: all 0.36s;
+                                transform: translate(-50%, calc(-100% + 3px));
+                            }
+                            
+                            &:after {
+                                border-top: 10px solid red;
+                                left: 50%;
+                                top: 100%;
+                                transition: all 0.36s;
+                                transform: translate(-50%, -3px);
+                            }
+
+                            span {
+                                position: absolute;
+                                opacity: 0;
+                                background-image: url("./images/register/red-angle.png");
+                                background-size: cover;
+                                width: 18px;
+                                height: 18px;
+                                transition: all 0.36s;
+                                text-align: center;
+                            
+                                &:nth-of-type(1) {
+                                    top: 0%;
+                                    left: 100%;
+                                    transform: translateX(-9px) translateY(calc(-100% + 8px));
+                                }
+                                &:nth-of-type(2) {
+                                    top: 100%;
+                                    left: 100%;
+                                    transform: translateX(-8px) translateY(-9px) rotateZ(90deg);
+                                }
+                                &:nth-of-type(3) {
+                                    top: 100%;
+                                    left: 0%;
+                                    transform: translateX(calc(-100% + 9px)) translateY(-9px) rotateZ(180deg);
+                                }
+                                &:nth-of-type(4) {
+                                    top: 0%;
+                                    left: 0%;
+                                    transform: translate(calc(-100% + 8px), calc(-100% + 9px)) rotateZ(-90deg);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .contactInfo {
+            display: flex;
+            flex-direction: column;
+            background-color: #800000;
+
+            .contactListContainer {
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+
+                .contactContainer {
+                    display: flex;
+                    flex-direction: column;
+
+                    .contactLabel {
+                        font-family: $paraFont;
+                        color: $primaryColor;
+                        font-size: 1.2rem;
+                        margin-bottom: 9px;
+                    }
+
+                    .contactInputContainer {
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+                        overflow: hidden;
+
+                        input {
+                            background-color: transparent;
+                            font-family: $paraFont;
+                            font-size: 0.72rem;
+                            padding: 9px;
+                            color: $primaryColor;
+
+                            &::placeholder {color: #bababa;}
+                        }
+
+                        .contactNameInput {
+                            position: relative;
+                            border-top: 2px solid black;
+                            border-left: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px dotted black;
+
+                        }
+                        .contactPhoneInput {
+                            border-top: none;
+                            border-left: 2px solid black;
+                            border-right: 2px solid black;
+                            border-bottom: 2px solid black;
+                        }
+
+                        span {
+                            position: absolute;
+                            width: 5px;
+                            aspect-ratio: 1;
+                            background-color: #000000;
+                            top: 50%;
+                            transform: translate(-50%, -50%) rotateZ(45deg);
+
+                            &:nth-of-type(1) {left: 1px;}
+                            &:nth-of-type(2) {left: 50%;}
+                            &:nth-of-type(3) {left: calc(100% - 1px);}
+                        }
+                    }
+                    
+                }
+            }
+            .actionButtonContainer {
+                margin-top: auto;
+                padding-top: 30px;
+                display: flex;
+                width: 100%;
+                justify-content: right;
+                gap: 12px;
+
+                .backButton {
+                    border: 1px solid black;
+                    color: $primaryColor;
+                    background-color: transparent;
+                    font-size: 0.8rem;
+                    font-family: $paraFont;
+                    padding: 6px 0px;
+                    min-width: 150px;
+                    transition: all 0.3s;
+
+                    &:hover {background-color: #00000043;}
+                }
+                
+                .registerButton {
+                    border: 1px solid black;
+                    color: black;
+                    background-color: white;
+                    font-size: 0.8rem;
+                    font-family: $paraFont;
+                    padding: 6px 0px;
+                    min-width: 150px;
+                    transition: all 0.3s;
+
+                    &:hover {background-color: rgba(255, 255, 255, 0.46);}
+                }
+            }
+        }
+    }
+}
+
+input:focus {outline: none;}

@@ -1,0 +1,21 @@
+@use '../../global.module.scss' as *;
+
+.singleScroller {
+    position: relative;
+
+    .ssBg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        .bgVideo {
+            height: 100vh;
+            width: 100vw;
+            object-fit: cover;
+            filter: brightness(0.5);
+        }
+    }
+}

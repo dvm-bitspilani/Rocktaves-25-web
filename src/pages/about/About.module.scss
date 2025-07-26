@@ -1,0 +1,51 @@
+@use '../../global.module.scss' as *;
+
+.about {
+    padding: 54px;
+    position: relative;
+    min-height: calc(100vh - 108px);
+    // background-color: black;    
+    // background-image: url("./images/about/bg-texture.png"), url("./images/about/concert-bg.png");
+    background-size: cover, cover;
+
+    .aboutTitle {
+        margin-top: 0px;
+        font-size: 2.7rem;
+        line-height: 2.7rem;
+        font-weight: lighter;
+        font-family: $titleFont;
+
+        @for $letterIndex from 1 through 5 {
+            span:nth-child(#{$letterIndex}) {
+                $color: nth($titleColors, random(length($titleColors)));
+                color: $color;
+                // filter: drop-shadow(0px 0px 10px $color);
+            }
+        }
+    }
+
+    .aboutContent {
+        display: flex;
+        gap: 1rem;
+
+        .aboutText {
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            font-family: $paraFont;
+            color: $primaryColor;
+
+            @for $i from 1 through 5 {
+                span:nth-child(#{$i}) {
+                    $color: nth($titleColors, random(length($titleColors)));
+                    color: $color;
+                    // filter: drop-shadow(0px 0px 10px $color);
+                }
+            }
+        }
+
+        .aboutImage {
+            width: 40%;
+            max-height: 10%;
+        }
+    }
+}

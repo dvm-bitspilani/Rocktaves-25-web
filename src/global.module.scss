@@ -1,0 +1,42 @@
+$titleFont: "TheRock", sans-serif;
+$secondaryFont: "RockSalt", sans-serif;
+$paraFont: "New Rocker", sans-serif;
+$bandNameFont: "Crazy Ivan", sans-serif;
+
+$primaryColor: #eeeeee;
+$titleColors: (
+    #ff0000,
+    #0000ff,
+    #00ff00,
+    #ffff00,
+    aqua,
+    magenta,
+    rgb(255, 60, 0),
+    rgb(255, 0, 89)
+);
+
+@font-face {
+    font-family: 'TheRock';
+    src: url('./fonts/THEROCK.otf') format('opentype');
+}
+@font-face {
+    font-family: 'RockSalt';
+    src: url('./fonts/RockSalt.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'New Rocker';
+    src: url('./fonts/NewRocker-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Crazy Ivan';
+    src: url('./fonts/crazyivan.ttf') format('truetype');
+}
+
+:root {
+    font-size: clamp(100%, 1.5vw + 6px, 300%);
+}
+
+body {
+    margin: 0px;
+    width: calc(100vw - (100vw - 100%));
+}
