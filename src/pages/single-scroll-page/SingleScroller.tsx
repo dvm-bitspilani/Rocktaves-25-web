@@ -94,14 +94,14 @@ export default function SingleScroller() {
 
 	return (
 		<>
-			{isLoading && <Preloader setIsLoading={setIsLoading} />}
+			{isLoading ? <Preloader setIsLoading={setIsLoading} /> : null}
 			<div className={styles.singleScroller}>
 				<div className={styles.ssBg}>
 					<video className={styles.bgVideo} autoPlay loop muted>
 						<source src="./vidoes/ROCTAVES_BG_VIDEO.mp4" type="video/mp4" />
 					</video>
 				</div>
-				<div ref={pageContRef}>
+				<div className={styles.pageContainer} ref={pageContRef}>
 					<Home ref={setPageRef(pages[0])} />
 					<About ref={setPageRef(pages[1])} />
 					<Rules ref={setPageRef(pages[2])} />

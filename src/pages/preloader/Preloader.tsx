@@ -48,6 +48,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
             gsap.to(preloaderRef.current, {
                 opacity: 0,
                 duration: 1,
+                delay: 1,
                 onComplete: () => {setIsLoading(false)},
             })
         })();
@@ -66,7 +67,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
         <div className={styles.preloader} ref={preloaderRef}>
             <div className={styles.equalizer}>
                 {
-                    Array(5).fill(null).map((_, i) => <VerticalBar key={i} setOn={percentageLoaded >= (i + 1)*10} />)
+                    Array(5).fill(null).map((_, i) => <VerticalBar key={i} setOn={percentageLoaded >= (i + 1)*20} />)
                 }
             </div>
         </div>
