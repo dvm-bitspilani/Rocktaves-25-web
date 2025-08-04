@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import styles from './Preloader.module.scss'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
