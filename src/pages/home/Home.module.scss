@@ -22,6 +22,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            
         }
         
         // video {
@@ -40,7 +41,7 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -30%);
+        transform: translate(-50%, -36%);
         text-align: center;
         color: $primaryColor;
         width: 60%;
@@ -74,10 +75,12 @@
                 aspect-ratio: 1.3;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 padding: 2.4rem 3.2rem;
                 transition: all 0.1s;
                 text-decoration: none;
                 cursor: pointer;
+                text-align: center;
 
                 &:hover {
                     filter: brightness(0.6);
@@ -98,6 +101,29 @@
                 }
                 
             } 
+
+            @media (max-width: $breakPoint) {
+                width: 100%;
+                margin: auto;
+                flex-wrap: wrap;
+                margin-top: 45px;
+
+                :nth-child(2) {
+                    order: -1;
+                    display: block;
+                    margin: 0px 15%;
+                }
+
+                :nth-child(odd) {
+                    padding: 0px;
+                    aspect-ratio: unset;
+                    width: 45%;
+                }
+            }
+        }
+
+        @media (max-width: $breakPoint) {
+            width: calc(100%);
         }
     }
 }

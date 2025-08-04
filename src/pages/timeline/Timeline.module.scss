@@ -60,4 +60,8 @@
             }
         }
     }
+    
+    @media (max-width: $breakPoint) {
+        padding: 24px;
+    }
 }

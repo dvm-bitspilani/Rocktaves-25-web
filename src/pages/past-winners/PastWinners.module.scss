@@ -59,6 +59,17 @@
                     bottom: calc(50% + 27px);
                     right: 0px;
                 }
+
+                @media (max-width: $breakPoint) {
+                    .bgGtr1 {
+                        width: 20%;
+                        left: -15px;
+                    }
+                    .bgGtr2 {
+                        width: 20%;
+                        bottom: calc(75% + 12px);
+                    }
+                }
             }
 
             .pwGallery {
@@ -79,7 +90,24 @@
                     &:nth-child(3) {grid-area: 2 / 2 / span 1 / span 7;}
                     &:nth-child(4) {grid-area: 2 / 10 / span 1 / span 7;}
                 }
+
+                @media (max-width: $breakPoint) {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 18px;
+
+                    @for $i from 1 through 4 {
+                        .pwImage:nth-of-type(#{$i}) {
+                            transform: translateX(-50px + $i*20px);
+                        }
+                    }
+                }
             }
         }
+
+        @media (max-width: $breakPoint) {
+            padding: 24px;
+        }
     }
+    
 }

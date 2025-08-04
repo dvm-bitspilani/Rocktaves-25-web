@@ -5,7 +5,7 @@
 .rulesPage {
     padding: 54px;
     position: relative;
-    min-height: calc(100vh - 108px);
+    min-height: calc(100svh - 108px);
     // background-color: black;
     // background-image: url('/images/rules/rules-bg.png');
     background-size: cover;
@@ -29,6 +29,7 @@
     .rulesText {
         font-family: $paraFont;
         color: $primaryColor;
+        z-index: 10;
 
         ol {
             display: flex;
@@ -47,6 +48,10 @@
                     }
                 }
             }
+
+            @media (max-width: $breakPoint) {
+                padding-left: 12px;
+            }
         }
     }
 
@@ -56,5 +61,9 @@
         position: absolute;
         width: 90%;
         bottom: 0%;
+        z-index: -1;
+    }
+    @media (max-width: $breakPoint) {
+        padding: 24px;
     }
 }

@@ -30,6 +30,9 @@
         display: flex;
         gap: 1rem;
 
+        @media (max-width: $breakPoint) {
+            flex-direction: column;
+        }
         .aboutText {
             font-size: 1.2rem;
             line-height: 1.8rem;
@@ -48,6 +51,16 @@
         .aboutImage {
             width: 40%;
             max-height: 10%;
+            
+            @media (max-width: $breakPoint) {
+                width: 90%;
+                margin: auto;
+                display: block;
+            }
         }
+    }
+    
+    @media (max-width: $breakPoint) {
+        padding: 24px;
     }
 }

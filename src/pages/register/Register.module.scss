@@ -12,6 +12,9 @@
         width: 100%;
         position: absolute;
 
+        @media (max-width: $breakPoint) {
+            grid-template-columns: 100%;
+        }
         .bandInfo, .contactInfo {
             padding: 54px;
 
@@ -35,6 +38,7 @@
 
             .bandNameContainer {
                 position: relative;
+                margin-bottom: 36px;
                 input {
                     position: relative;
                     width: calc(100% - 28px);
@@ -74,6 +78,33 @@
                         top: 0%;
                         transform: translateX(-2px) translateY(calc(-100% + 2px)) rotateZ(180deg);
                     }
+                }
+            }
+
+            .bandMemNumWrapper {
+                position: relative;
+                font-size: 1rem;
+                color: $primaryColor;
+                font-family: $paraFont;
+                display: flex;
+                justify-content: space-between;
+
+                input {
+                    background-color: #ff00002d;
+                    border: 2px solid rgb(144, 0, 0);
+                    color: $primaryColor;
+                    font-family: $paraFont;
+                    font-size: 0.9rem;
+                    width: 30px;
+                    text-align: center;
+                    padding: 3px 12px;
+
+                    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                        appearance: none;
+                        -webkit-appearance: none;
+                    }
+                    margin: 0px;
+                    -moz-appearance: textfield;
                 }
             }
 
@@ -267,6 +298,8 @@
                 width: 100%;
                 justify-content: right;
                 gap: 12px;
+                display: flex;
+                flex-wrap: wrap-reverse;
 
                 .backButton {
                     border: 1px solid black;

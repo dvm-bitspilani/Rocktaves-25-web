@@ -1,12 +1,16 @@
-import { forwardRef } from 'react'
+import { forwardRef, useContext } from 'react'
 import styles from './Home.module.scss'
 import { Link } from 'react-router'
+import { AppContext, type AppContextType } from '../../App'
 
 export const Home = forwardRef<HTMLDivElement>((_, ref) => {
+
+	const {appStates} = useContext<AppContextType>(AppContext);
+	
 	return (
 		<div className={styles.home} ref={ref}>
 			<div className={styles.homeBg}>
-				<img className={styles.homeBgImageOverlay} src="/images/home/home-bg-overlay.png" />
+				<img className={styles.homeBgImageOverlay} src={`/images/home/home-bg-overlay${appStates?.isMobile ? "-mobile" : ""}.png`} />
 			</div>
 			<div className={styles.homeContent}>
 				<h1 className={styles.title}>
