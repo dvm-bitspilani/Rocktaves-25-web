@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import styles from './Toaster.module.scss';
-import { addItemToArrayState, arrayStatePop, setObjectState } from '../global';
+import { arrayStatePop, setObjectState } from '../global';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { AppContext } from '../App';
