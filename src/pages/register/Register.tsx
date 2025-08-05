@@ -39,7 +39,7 @@ export default function Register() {
         event.preventDefault();
         event.stopPropagation();
 
-        const postLink = `https://prereg.bits-oasis.org/RoctavesOnlineReg/`;
+        const baseLink = `https://prereg.bits-oasis.org/`;
         const formData = Object.fromEntries(new FormData(formRef.current as HTMLFormElement).entries());
 
         if (!Object.keys(formData).every((key) => {
@@ -65,7 +65,7 @@ export default function Register() {
                     return;
                 }
 
-        axios.post(postLink, formData, {
+        axios.post(`${baseLink}/`, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
