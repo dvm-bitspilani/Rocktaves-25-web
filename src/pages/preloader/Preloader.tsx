@@ -16,33 +16,32 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
     const cacheAssets = async () => {
         const handleEvent = (callback: VoidFunction) => {
             setPercentageLoaded(prev => {
-                console.log(prev)
                 return (prev + 100/numOfAssets)})
-            console.log(percentageLoaded, numOfAssets)
-            return callback();
+            return callback(); 
         }
 
         const promises = [
-            ...assetList.images.map(imgSrc => (
+            ...assetList.images.map(imgSrc => 
                 new Promise<HTMLImageElement>((resolve, reject) => {
                     const img = new Image();
                     img.src = imgSrc;
                     img.onload = () => handleEvent(() => resolve(img));
                     img.onerror = (err) => handleEvent(() => reject(err));
+                    console.log(img.src)
                 })
-            )),
-            ...assetList.videos.map(videoSrc => (
+            ),
+            ...assetList.videos.map(videoSrc => 
                 new Promise<HTMLVideoElement>((resolve, reject) => {
                     const video = document.createElement('video');
                     video.src = videoSrc;
                     video.onloadeddata = () => handleEvent(() => resolve(video));
                     video.onerror = (err) => handleEvent(() => reject(err));
+                    console.log(video.src)
                 })
-            ))
+            )
         ];
 
         await Promise.all(promises) 
-            .then(() => console.log("loading complete"))
             .catch((error) => console.log(error));
         contextSafe(() => {
             setIsLoading(false)

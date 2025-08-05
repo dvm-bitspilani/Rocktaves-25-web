@@ -36,7 +36,6 @@ const Notification = ({message, onRemove}: {message: string, onRemove: VoidFunct
 export default function Toaster() {
 
     const [notificationList, setNotificationList] = useState<notif []>([])
-    console.log('hey')
 
     const removeNotif = () => setNotificationList(prev => arrayStatePop(prev));
     const addNotif = (message: string) => {
