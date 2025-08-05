@@ -98,7 +98,7 @@ export default function SingleScroller() {
 			<div className={styles.singleScroller}>
 				<div className={styles.ssBg}>
 					<video className={styles.bgVideo} autoPlay loop muted>
-						<source src="./vidoes/ROCTAVES_BG_VIDEO.mp4" type="video/mp4" />
+						<source src="./videos/ROCTAVES_BG_VIDEO.mp4" type="video/mp4" />
 					</video>
 				</div>
 				<div className={styles.pageContainer} ref={pageContRef}>
