@@ -43,7 +43,6 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
         const formData = Object.fromEntries(new FormData(formRef.current as HTMLFormElement).entries());
 
         if (!Object.keys(formData).every((key) => {
-                console.log(key, formInputPattern[key], formData[key], formData, addNotif);
                 const isValid = formInputPattern[key].test((formData[key] as string).toLowerCase());
                 if (!isValid && addNotif) {
                     if (key === "name" || key == "city") addNotif(`Please fill the band ${key}.`)
@@ -53,7 +52,6 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                     else if (key === "email_address") addNotif("Please fill the email in the correct format.")
                     else if (key === "music_since") addNotif("Please fill the year of inception of the band correctly in YYYY format.")
                 }
-                (console.log(key, formInputPattern[key], formData[key]))
                 return isValid;
             })) {
             return;

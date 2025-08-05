@@ -80,14 +80,13 @@ export default function SingleScroller() {
 				if (entry.isIntersecting) {
 					const page = entry.target.id;
 					if (pages && pages.includes(page) || page === '') navigate(`/${page}`);
-					console.log("Test 1 done")
 				}
 			})
 		}, {threshold: 0.5})
 
 		const bindObservers = () => {
 			Object.values(pageRefs.current).forEach((page) => observer.observe(page as Element));
-			console.log("observeres binded")
+			("observeres binded")
 			initialScrollOver.current = true;
 		}
 
@@ -99,7 +98,6 @@ export default function SingleScroller() {
 		}
 		// else bindObservers()
 		bindObservers()
-		console.log(initialScrollOver.current)
 		return () => {
 			// window.removeEventListener("scrollend", () => {bindObservers()} );
 			observer.disconnect();

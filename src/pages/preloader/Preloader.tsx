@@ -27,7 +27,6 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
                     img.src = imgSrc;
                     img.onload = () => handleEvent(() => resolve(img));
                     img.onerror = (err) => handleEvent(() => reject(err));
-                    console.log(img.src)
                 })
             ),
             ...assetList.videos.map(videoSrc => 
@@ -37,7 +36,6 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
                     video.preload = "auto";
                     video.onloadeddata = () => handleEvent(() => resolve(video));
                     video.onerror = (err) => handleEvent(() => reject(err));
-                    console.log(video.src)
                 })
             )
         ];

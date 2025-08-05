@@ -9,7 +9,6 @@ const setObjectState = (state: any, key: string, value: any) => {
 }
 
 const addItemToArrayState = (state: any, item: any) => {
-    console.log(state, item)
     const newArray = [...state]
     newArray.push(item)
     return newArray
