@@ -41,7 +41,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
             ))
         ];
 
-        await Promise.all(promises)
+        await Promise.all(promises) 
             .then(() => console.log("loading complete"))
             .catch((error) => console.log(error));
         contextSafe(() => {
