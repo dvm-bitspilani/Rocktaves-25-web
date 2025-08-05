@@ -1,4 +1,4 @@
-import { useContext, useRef, type FormEvent, type HTMLInputTypeAttribute } from "react";
+import { useContext, useEffect, useRef, type FormEvent, type HTMLInputTypeAttribute } from "react";
 import styles from "./Register.module.scss";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -29,7 +29,7 @@ const BandInfoInputField = ({name, placeholder, type}: {name: string, placeholde
     )
 }
 
-export default function Register() {
+export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<React.SetStateAction<boolean>>}) {
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
     const { appStates } = useContext(AppContext);
@@ -46,8 +46,7 @@ export default function Register() {
                 console.log(key, formInputPattern[key], formData[key], formData, addNotif);
                 const isValid = formInputPattern[key].test((formData[key] as string).toLowerCase());
                 if (!isValid && addNotif) {
-                    if (key === "venue") addNotif(`Please check at least one venue to contest in.`)
-                    else if (key === "name" || key == "city") addNotif(`Please fill the band ${key}.`)
+                    if (key === "name" || key == "city") addNotif(`Please fill the band ${key}.`)
                     else if (key === "number_of_members") addNotif(`Please fill the number of band members in your band.`)
                     else if (key.includes("name")) addNotif("Please fill the contact names in the correct format: They can only contain alphabets, numbers or whitespace. Also the required contact fields cannot be blank.")
                     else if (key.includes("phone")) addNotif("Please fill the contact phone number in the correct format: They must be of 10 digits only. Also the required contact fields cannot be blank.")
@@ -57,28 +56,41 @@ export default function Register() {
                 (console.log(key, formInputPattern[key], formData[key]))
                 return isValid;
             })) {
-                return;
-            }
+            return;
+        }
         
-                if (addNotif && venues.filter((ven) => ven !== "online").includes(formData["city"] as string) && formData["city"] !== formData["venue"]) {
-                    addNotif("Bands are only allowed to contest from cities from where they're based in if offline rounds are being held there.") 
-                    return;
-                }
+        if (addNotif && !formData.venue) {
+            addNotif(`Please check at least one venue to contest in.`)
+            return
+        }
+    
+        if (addNotif && venues.filter((ven) => ven !== "online").includes(formData["city"] as string) && formData["city"] !== formData["venue"]) {
+            addNotif("Bands are only allowed to contest from cities from where they're based in if offline rounds are being held there.") 
+            return;
+        }
 
-        axios.post(`${baseLink}/`, formData, {
+        axios.post(`${baseLink}/$${formData.venue === "online" ? "/RoctavesOnlineReg/" : "/RoctavesOfflineReg/"}`, 
+            formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
             if (addNotif) addNotif("You've been successfully registered for Rocktaves 2025.")
+        }).catch(() => {
+            if (addNotif) addNotif("Something went wrong, your registration could not be completed.")
         })
     }
 
-    // useEffect(() => {setIsLoading(false)}, [])
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault()
+        event.stopPropagation()
+    }
+
+    useEffect(() => {setIsLoading(true)}, [])
 
     return (
         <div className={styles.registerPage}>
-            <form className={styles.registerForm} ref={formRef}>
+            <form className={styles.registerForm} ref={formRef} onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.bandInfo}>
                     <h2 className={styles.infoTitle}>Band Info</h2>
                     <BandInfoInputField name="name" placeholder="Band Name" type="text" />

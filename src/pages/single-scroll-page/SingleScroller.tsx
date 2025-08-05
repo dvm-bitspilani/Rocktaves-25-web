@@ -6,11 +6,11 @@ import { PastWinners } from '../past-winners/PastWinners'
 import { Rules } from '../rules/Rules'
 import { Timeline } from '../timeline/Timeline'
 import styles from './SingleScroller.module.scss'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Preloader from '../preloader/Preloader'
+// import Preloader from '../preloader/Preloader'
 
 const pages = [
 	"home",
@@ -22,10 +22,9 @@ const pages = [
 ]
 
 export default function SingleScroller() {
-	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const navigate = useNavigate();
 	const location = useLocation();
-	const initialScrollOver = useRef(["home", ""].includes(location.pathname));
+	const initialScrollOver = useRef(["/home", "/"].includes(location.pathname));
 	const pageRefs = useRef<Record<(typeof pages)[number], HTMLDivElement | null>>({});
 	const pageContRef = useRef<HTMLDivElement>(null);
 	const setPageRef = (page: (typeof pages)[number]) => {
@@ -35,6 +34,13 @@ export default function SingleScroller() {
 				elem.id = page;
 			}
 		}
+	}
+
+	const scrollToPage = (page: string) => {
+		pageRefs.current[page]?.scrollIntoView({
+			behavior: "smooth",
+			block: "start"
+		})
 	}
 
 	useEffect(() => {
@@ -74,6 +80,7 @@ export default function SingleScroller() {
 				if (entry.isIntersecting) {
 					const page = entry.target.id;
 					if (pages && pages.includes(page) || page === '') navigate(`/${page}`);
+					console.log("Test 1 done")
 				}
 			})
 		}, {threshold: 0.5})
@@ -84,17 +91,24 @@ export default function SingleScroller() {
 			initialScrollOver.current = true;
 		}
 
-		if (!initialScrollOver.current) window.addEventListener("scrollend", () => {bindObservers()}, {once: true});
+		if (!initialScrollOver.current) {
+			// window.addEventListener("scrollend", () => {bindObservers()}, {once: true});
+			const target = location.pathname.replace("/", "");
+			if (pages.includes(target))  scrollToPage(target)
+			else navigate("/")
+		}
+		// else bindObservers()
+		bindObservers()
 		console.log(initialScrollOver.current)
 		return () => {
-			window.removeEventListener("scrollend", () => {bindObservers()} );
+			// window.removeEventListener("scrollend", () => {bindObservers()} );
 			observer.disconnect();
 		}
 	}, []);
 
 	return (
 		<>
-			{isLoading ? <Preloader setIsLoading={setIsLoading} /> : null}
+			{/* {isLoading ? <Preloader setIsLoading={setIsLoading} /> : null} */}
 			<div className={styles.singleScroller}>
 				<div className={styles.ssBg}>
 					<video className={styles.bgVideo} autoPlay loop muted>
@@ -102,7 +116,7 @@ export default function SingleScroller() {
 					</video>
 				</div>
 				<div className={styles.pageContainer} ref={pageContRef}>
-					<Home ref={setPageRef(pages[0])} />
+					<Home scrollToPage={scrollToPage} ref={setPageRef(pages[0])} />
 					<About ref={setPageRef(pages[1])} />
 					<Rules ref={setPageRef(pages[2])} />
 					<Timeline ref={setPageRef(pages[3])} />

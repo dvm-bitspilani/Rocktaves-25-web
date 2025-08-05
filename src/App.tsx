@@ -5,6 +5,7 @@ import Register from './pages/register/Register';
 import { createContext, useEffect, useState } from 'react';
 import { setObjectState } from './global';
 import Toaster from './components/Toaster';
+import Preloader from './pages/preloader/Preloader';
 
 interface AppStatesType {
 	isMobile: boolean,
@@ -19,6 +20,7 @@ export interface AppContextType {
 export const AppContext = createContext<AppContextType>({});
 
 export default function App() {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const mobileBreakPoint = 750;
 	const [appStates, setAppStates] = useState<AppStatesType>({
 		isMobile: window.innerWidth <= mobileBreakPoint,
@@ -40,8 +42,8 @@ export default function App() {
 	return (
 		<AppContext.Provider value={{appStates, setAppStates}}>
 			<Routes>	
-				<Route path='register' element={<Register />}></Route>
-				<Route path='*' element={<SingleScroller />}></Route>
+				<Route path='register' element={<Register setIsLoading={setIsLoading} />}></Route>
+				<Route path='*' element={isLoading ? <Preloader setIsLoading={setIsLoading} /> : <SingleScroller />}></Route>
 			</Routes>
 			<Toaster />
 		</AppContext.Provider>

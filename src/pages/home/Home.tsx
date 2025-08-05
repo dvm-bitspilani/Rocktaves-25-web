@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gsap from 'gsap'
 
-export const Home = forwardRef<HTMLDivElement>((_, ref) => {
+export const Home = forwardRef<HTMLDivElement, {scrollToPage: (page: string) => void}>(({scrollToPage}, ref) => {
 
 	const {appStates} = useContext<AppContextType>(AppContext);
 
@@ -38,9 +38,9 @@ export const Home = forwardRef<HTMLDivElement>((_, ref) => {
 					}
 				</h1>
 				<div className={styles.navlinks}>
-					<Link to="/about" className={styles.navlink}>About</Link>
+					<div onClick={() => scrollToPage("about")} className={styles.navlink}>About</div>
 					<Link to="/register" className={styles.navlink}>Register</Link>
-					<Link to="/contact" className={styles.navlink}>Contact</Link>
+					<div onClick={() => scrollToPage("contact")} className={styles.navlink}>Contact</div>
 				</div>
 			</div>
 		</div>

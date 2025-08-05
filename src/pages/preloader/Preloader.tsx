@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Preloader.module.scss';
 import assetList from './assetList';
-import gsap from 'gsap';
+// import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import VerticalBar from './VerticalBar';
 
@@ -45,12 +45,13 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
             .then(() => console.log("loading complete"))
             .catch((error) => console.log(error));
         contextSafe(() => {
-            gsap.to(preloaderRef.current, {
-                opacity: 0,
-                duration: 1,
-                delay: 1,
-                onComplete: () => {setIsLoading(false)},
-            })
+            setIsLoading(false)
+            // gsap.to(preloaderRef.current, {
+            //     opacity: 0,
+            //     duration: 1,
+            //     delay: 1,
+            //     onComplete: () => {setIsLoading(false)},
+            // })
         })();
     }
 
