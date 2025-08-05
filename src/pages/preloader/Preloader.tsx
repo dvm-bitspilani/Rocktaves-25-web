@@ -34,6 +34,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
                 new Promise<HTMLVideoElement>((resolve, reject) => {
                     const video = document.createElement('video');
                     video.src = videoSrc;
+                    video.preload = "auto";
                     video.onloadeddata = () => handleEvent(() => resolve(video));
                     video.onerror = (err) => handleEvent(() => reject(err));
                     console.log(video.src)
@@ -55,10 +56,8 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
     }
 
     useEffect(() => {
-        if (!hasRunOnce.current) {
-            hasRunOnce.current = true;
-            return;
-        }
+		if (hasRunOnce.current) return;
+		hasRunOnce.current = true;
 
         cacheAssets();
     }, [])
