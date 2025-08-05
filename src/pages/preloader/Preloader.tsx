@@ -15,10 +15,10 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
 
     const cacheAssets = async () => {
         const handleEvent = (callback: VoidFunction) => {
-			setPercentageLoaded((prev) => {
-				const newPercentage = prev + (1/numOfAssets)*100;
-				return newPercentage;
-			});
+            setPercentageLoaded(prev => {
+                console.log(prev)
+                return (prev + 100/numOfAssets)})
+            console.log(percentageLoaded, numOfAssets)
             return callback();
         }
 

@@ -5,7 +5,7 @@ export const PastWinners = forwardRef<HTMLDivElement>((_, ref) => {
     return (
         <div className={styles.pastWinnersPage} ref={ref}>
             <div className={styles.pwPageBg}>
-                <img className={styles.visualizer} src="./images/winners/visualizer.png" />
+                {/* <img className={styles.visualizer} src="./images/winners/visualizer.png" /> */}
             </div>
             <div className={styles.pastWinnersContent}>
                 <h2 className={styles.pastWinnersTitle}>

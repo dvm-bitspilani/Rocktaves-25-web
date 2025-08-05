@@ -31,55 +31,11 @@
         .bandInfo {
             background-color: #000000;
             background-image: url("/images/register/bg-dust.png");
-            background-size: contain;
+            background-size: 100% 100%;
             background-repeat: no-repeat;
             display: flex;
+            gap: 0.45rem;
             flex-direction: column;
-
-            .bandNameContainer {
-                position: relative;
-                margin-bottom: 36px;
-                input {
-                    position: relative;
-                    width: calc(100% - 28px);
-                    background-color: #ffffff2d;
-                    border: 2px solid white;
-                    font-family: $bandNameFont;
-                    color: rgb(224, 224, 224);
-                    padding: 12px;
-                    font-size: 1rem;
-                    font-weight: lighter;
-                }
-
-                span {
-                    position: absolute;
-                    width: 18px;
-                    height: 18px;
-                    background-image: url("/images/register/lightening.png");
-                    background-size: 18px 18px;
-
-                    &:nth-of-type(1) {
-                        left: 0px;
-                        top: 100%;
-                        transform: translateX(calc(-100% + 2px)) translateY(-2px);
-                    }
-                    &:nth-of-type(2) {
-                        left: 100%;
-                        top: 100%;
-                        transform: translateX(-2px) translateY(-2px) rotateY(180deg);
-                    }
-                    &:nth-of-type(3) {
-                        left: 0px;
-                        top: 0%;
-                        transform: translateX(calc(-100% + 2px)) translateY(calc(-100% + 2px)) rotateX(180deg);
-                    }
-                    &:nth-of-type(4) {
-                        left: 100%;
-                        top: 0%;
-                        transform: translateX(-2px) translateY(calc(-100% + 2px)) rotateZ(180deg);
-                    }
-                }
-            }
 
             .bandMemNumWrapper {
                 position: relative;
@@ -98,13 +54,6 @@
                     width: 30px;
                     text-align: center;
                     padding: 3px 12px;
-
-                    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
-                        appearance: none;
-                        -webkit-appearance: none;
-                    }
-                    margin: 0px;
-                    -moz-appearance: textfield;
                 }
             }
 
@@ -331,4 +280,86 @@
     }
 }
 
+
+.bandInfoInputWrapper {
+    position: relative;
+    margin-bottom: 36px;
+    input {
+        position: relative;
+        width: calc(100% - 28px);
+        background-color: #ffffff2d;
+        border: 2px solid white;
+        font-family: $bandNameFont;
+        color: rgb(224, 224, 224);
+        padding: 12px;
+        font-size: 1rem;
+        font-weight: lighter;
+    }
+
+    span {
+        position: absolute;
+        width: 0.63rem;
+        height: 0.63rem;
+
+        &:nth-of-type(-n+4) {
+            background-image: url("/images/register/lightening.png");
+            background-size: 0.63rem 0.63rem;
+        }
+        &:nth-of-type(1) {
+            left: 0px;
+            top: 100%;
+            transform: translateX(calc(-100% + 2px)) translateY(-2px);
+        }
+        &:nth-of-type(2) {
+            left: 100%;
+            top: 100%;
+            transform: translateX(-2px) translateY(-2px) rotateY(180deg);
+        }
+        &:nth-of-type(3) {
+            left: 0px;
+            top: 0%;
+            transform: translateX(calc(-100% + 2px)) translateY(calc(-100% + 2px)) rotateX(180deg);
+        }
+        &:nth-of-type(4) {
+            left: 100%;
+            top: 0%;
+            transform: translateX(-2px) translateY(calc(-100% + 2px)) rotateZ(180deg);
+        }
+
+        &:nth-of-type(n+5) {
+            height: 0.3rem;
+            width: 0.3rem;
+            background-color: white;
+        }
+        &:nth-of-type(5) {
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% + 1px)) rotateZ(45deg);
+        }
+        &:nth-of-type(6) {
+            top: 50%;
+            left: 0%;
+            transform: translate(calc(-50% + 1px), -50%) rotateZ(45deg);
+        }
+        &:nth-of-type(7) {
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% - 1px)) rotateZ(45deg);
+        }
+        &:nth-of-type(8) {
+            top: 50%;
+            left: 100%;
+            transform: translate(calc(-50% - 1px), -50%) rotateZ(45deg);
+        }
+    }
+}
+
+input {
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        appearance: none;
+        -webkit-appearance: none;
+    }
+    margin: 0px;
+    -moz-appearance: textfield;
+}
 input:focus {outline: none;}

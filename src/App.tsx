@@ -25,14 +25,17 @@ export default function App() {
 	})
 
 	useEffect(() => {
-		const handleWinResize = () => setObjectState(appStates, 'isMobile', window.innerWidth <= mobileBreakPoint);
+		const handleWinResize = () => {
+			const isMobile = window.innerWidth <= mobileBreakPoint
+			setAppStates(prev => setObjectState(prev, 'isMobile', isMobile));
+		}
 
 		window.addEventListener("resize", handleWinResize);
 
 		return () => {
 			window.removeEventListener("resize", handleWinResize);
 		}
-	})
+	}, [])
 
 	return (
 		<AppContext.Provider value={{appStates, setAppStates}}>

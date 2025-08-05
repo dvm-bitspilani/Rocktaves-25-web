@@ -19,10 +19,10 @@ const assetList = {
         '/public/images/winners/parikrama.png',
         '/public/images/winners/prestorika.png',
         '/public/images/winners/them-clones.png',
-        '/public/images/winners/visualizer.png',
+        // '/public/images/winners/visualizer.png',
     ],
     "videos": [
-        "/public/ROCTAVES_BG_VIDEO.mp4"
+        "/public/videos/ROCTAVES_BG_VIDEO.mp4"
     ]
 }
 

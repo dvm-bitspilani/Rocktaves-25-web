@@ -41,7 +41,7 @@ export default function Toaster() {
     const removeNotif = () => setNotificationList(prev => arrayStatePop(prev));
     const addNotif = (message: string) => {
         console.log(notificationList)
-        setNotificationList(addItemToArrayState(notificationList, {message: message, key: (new Date()).getTime()}));
+        setNotificationList(prev => [...prev, {message: message, key: (new Date()).getTime()}]);
     }
 
     const { appStates, setAppStates } = useContext(AppContext);

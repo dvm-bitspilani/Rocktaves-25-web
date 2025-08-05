@@ -5,7 +5,7 @@
 .rulesPage {
     padding: 54px;
     position: relative;
-    min-height: calc(100svh - 108px);
+    // min-height: calc(100svh - 108px);
     // background-color: black;
     // background-image: url('/images/rules/rules-bg.png');
     background-size: cover;
@@ -58,7 +58,7 @@
     .rulesImage {
         display: block;
         margin: auto;
-        position: absolute;
+        margin-top: 1.5rem;
         width: 90%;
         bottom: 0%;
         z-index: -1;

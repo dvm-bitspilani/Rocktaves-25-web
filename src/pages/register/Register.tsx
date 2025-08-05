@@ -1,20 +1,32 @@
-import { useContext, useRef, type FormEvent } from "react";
+import { useContext, useRef, type FormEvent, type HTMLInputTypeAttribute } from "react";
 import styles from "./Register.module.scss";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { AppContext } from "../../App";
 
-const venues: string[] = ["mumbai", "bangalore", "chennai", "online"];
+const venues: string[] = ["mumbai", "bangalore", "chennai", "delhi", "kolkata", "online"];
 const formInputPattern: Record<string, RegExp> = {
     "name": /^.+$/,
+    "email_address": /^[a-z0-9\._\-\+]+@[a-z0-9\-\.]+$/,
     "number_of_members": /^\d+$/,
     "venue": RegExp(`^${venues.join("|")}$`),
     "name1": /^[a-z 0-9]+$/,
-    "phone1": /^\d{10}$/,
+    "phone": /^\d{10}$/,
     "name2": /^[a-z 0-9]+$/,
     "phone2": /^\d{10}$/,
     "name3": /^([a-z 0-9]+)?$/,
     "phone3": /^(\d{10})?$/,
+    "city": /^.+$/,
+    "music_since": /^\d{4}$/
+}
+
+const BandInfoInputField = ({name, placeholder, type}: {name: string, placeholder: string, type: HTMLInputTypeAttribute}) => {
+    return (
+        <div className={styles.bandInfoInputWrapper}>
+            <input name={name} type={type} placeholder={placeholder} />
+            {Array(8).fill(null).map((_, i) => <span key={i} />)}
+        </div>
+    )
 }
 
 export default function Register() {
@@ -31,22 +43,34 @@ export default function Register() {
         const formData = Object.fromEntries(new FormData(formRef.current as HTMLFormElement).entries());
 
         if (!Object.keys(formData).every((key) => {
-                const isValid = formInputPattern[key].test(formData[key] as string);
-                // console.log(key, isValid, formInputPattern[key], formData[key], formData, addNotif);
-                if (addNotif) {
+                console.log(key, formInputPattern[key], formData[key], formData, addNotif);
+                const isValid = formInputPattern[key].test((formData[key] as string).toLowerCase());
+                if (!isValid && addNotif) {
                     if (key === "venue") addNotif(`Please check at least one venue to contest in.`)
-                    else if (key === "name") addNotif(`Please fill the band name.`)
+                    else if (key === "name" || key == "city") addNotif(`Please fill the band ${key}.`)
                     else if (key === "number_of_members") addNotif(`Please fill the number of band members in your band.`)
                     else if (key.includes("name")) addNotif("Please fill the contact names in the correct format: They can only contain alphabets, numbers or whitespace. Also the required contact fields cannot be blank.")
                     else if (key.includes("phone")) addNotif("Please fill the contact phone number in the correct format: They must be of 10 digits only. Also the required contact fields cannot be blank.")
+                    else if (key === "email_address") addNotif("Please fill the email in the correct format.")
+                    else if (key === "music_since") addNotif("Please fill the year of inception of the band correctly in YYYY format.")
                 }
+                (console.log(key, formInputPattern[key], formData[key]))
                 return isValid;
-            })) return;
+            })) {
+                return;
+            }
+        
+                if (addNotif && venues.filter((ven) => ven !== "online").includes(formData["city"] as string) && formData["city"] !== formData["venue"]) {
+                    addNotif("Bands are only allowed to contest from cities from where they're based in if offline rounds are being held there.") 
+                    return;
+                }
 
         axios.post(postLink, formData, {
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(() => {
+            if (addNotif) addNotif("You've been successfully registered for Rocktaves 2025.")
         })
     }
 
@@ -57,17 +81,15 @@ export default function Register() {
             <form className={styles.registerForm} ref={formRef}>
                 <div className={styles.bandInfo}>
                     <h2 className={styles.infoTitle}>Band Info</h2>
-                    <div className={styles.bandNameContainer}>
-                        <input name="name" type="text" placeholder="Band Name" className={styles.bandNameInput} />
-                        <span />
-                        <span />
-                        <span />
-                        <span />
-                    </div>
-                    <div className={styles.bandMemNumWrapper}>
+                    <BandInfoInputField name="name" placeholder="Band Name" type="text" />
+                    <BandInfoInputField name="email_address" placeholder="Your Email" type="email" />
+                    <BandInfoInputField name="number_of_members" placeholder="Number of Band Members" type="number" />
+                    <BandInfoInputField name="music_since" placeholder="Year of Inception of Band" type="number" />
+                    <BandInfoInputField name="city" placeholder="City you're based in" type="text" />
+                    {/* <div className={styles.bandMemNumWrapper}>
                         <label htmlFor="memNum">Number of band members: </label>
                         <input type="number" id="memNum" name="number_of_members" placeholder="0"></input>
-                    </div>
+                    </div> */}
                     <div className={styles.venueContainer}>
                         <h3 className={styles.venueTitle}>Venue you can contest in:</h3>
                         <div className={styles.venueSelectContainer}>
@@ -95,7 +117,7 @@ export default function Register() {
                             <label className={styles.contactLabel}>Contact 1:</label>
                             <div className={styles.contactInputContainer}>
                                 <input type="text" name="name1" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" />
-                                <input type="tel" name="phone1" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" />
+                                <input type="tel" name="phone" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" />
                                 <span />
                                 <span />
                                 <span />
