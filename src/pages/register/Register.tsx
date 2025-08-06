@@ -56,9 +56,14 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
             })) {
             return;
         }
+
+        if (addNotif && !formData.name3 !== !formData.phone3) {
+            addNotif("Please fill either both Name and Phone of Contact 3 or none of them.")
+            return
+        }
         
         if (addNotif && !formData.venue) {
-            addNotif(`Please check at least one venue to contest in.`)
+            addNotif(`Please check a venue to contest in.`)
             return
         }
     
@@ -72,8 +77,12 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(() => {
-            if (addNotif) addNotif("You've been successfully registered for Rocktaves 2025.")
+        }).then((response) => {
+            if (addNotif) {
+                if (response.data.status === "1") addNotif("You've been successfully registered for Rocktaves 2025.")
+                else addNotif(`Please fill the details correctly: ${response.data.message}`)
+            }
+                console.log(response)
         }).catch(() => {
             if (addNotif) addNotif("Something went wrong, your registration could not be completed.")
         })
