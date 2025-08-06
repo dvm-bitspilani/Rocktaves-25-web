@@ -42,10 +42,10 @@ export default function Toaster() {
         setNotificationList(prev => [...prev, {message: message, key: (new Date()).getTime()}]);
     }
 
-    const { appStates, setAppStates } = useContext(AppContext);
+    const { setAppStates } = useContext(AppContext);
 
     useEffect(() => {
-        if (setAppStates) setAppStates(setObjectState(appStates, "addNotif", addNotif))
+        if (setAppStates) setAppStates(prev => setObjectState(prev, "addNotif", addNotif))
     }, [])
 
     return (
