@@ -20,10 +20,10 @@ const formInputPattern: Record<string, RegExp> = {
     "music_since": /^\d{4}$/
 }
 
-const BandInfoInputField = ({name, placeholder, type}: {name: string, placeholder: string, type: HTMLInputTypeAttribute}) => {
+const BandInfoInputField = ({name, placeholder, type, maxLength}: {name: string, placeholder: string, type: HTMLInputTypeAttribute, maxLength: number}) => {
     return (
         <div className={styles.bandInfoInputWrapper}>
-            <input name={name} type={type} placeholder={placeholder} />
+            <input name={name} type={type} placeholder={placeholder} maxLength={maxLength} />
             {Array(8).fill(null).map((_, i) => <span key={i} />)}
         </div>
     )
@@ -100,11 +100,11 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
             <form className={styles.registerForm} ref={formRef} onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.bandInfo}>
                     <h2 className={styles.infoTitle}>Band Info</h2>
-                    <BandInfoInputField name="name" placeholder="Band Name" type="text" />
-                    <BandInfoInputField name="email_address" placeholder="Your Email" type="email" />
-                    <BandInfoInputField name="number_of_members" placeholder="Number of Band Members" type="number" />
-                    <BandInfoInputField name="music_since" placeholder="Year of Inception of Band" type="number" />
-                    <BandInfoInputField name="city" placeholder="City you're based in" type="text" />
+                    <BandInfoInputField name="name" placeholder="Band Name" type="text" maxLength={50} />
+                    <BandInfoInputField name="email_address" placeholder="Your Email" type="email" maxLength={254} />
+                    <BandInfoInputField name="number_of_members" placeholder="Number of Band Members" type="number" maxLength={4} />
+                    <BandInfoInputField name="music_since" placeholder="Year of Inception of Band" type="number" maxLength={4} />
+                    <BandInfoInputField name="city" placeholder="City you're based in" type="text" maxLength={30} />
                     {/* <div className={styles.bandMemNumWrapper}>
                         <label htmlFor="memNum">Number of band members: </label>
                         <input type="number" id="memNum" name="number_of_members" placeholder="0"></input>
@@ -135,8 +135,8 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                         <div className={styles.contactContainer}>
                             <label className={styles.contactLabel}>Contact 1:</label>
                             <div className={styles.contactInputContainer}>
-                                <input type="text" name="name1" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" />
-                                <input type="tel" name="phone" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" />
+                                <input type="text" name="name1" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" maxLength={50} />
+                                <input type="tel" name="phone" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" maxLength={10} />
                                 <span />
                                 <span />
                                 <span />
@@ -145,8 +145,8 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                         <div className={styles.contactContainer}>
                             <label className={styles.contactLabel}>Contact 2:</label>
                             <div className={styles.contactInputContainer}>
-                                <input type="text" name="name2" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" />
-                                <input type="tel" name="phone2" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" />
+                                <input type="text" name="name2" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" maxLength={50} />
+                                <input type="tel" name="phone2" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" maxLength={10} />
                                 <span />
                                 <span />
                                 <span />
@@ -155,8 +155,8 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                         <div className={styles.contactContainer}>
                             <label className={styles.contactLabel}>Contact 3 (if any):</label>
                             <div className={styles.contactInputContainer}>
-                                <input type="text" name="name3" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" />
-                                <input type="tel" name="phone3" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" />
+                                <input type="text" name="name3" placeholder="Name of the contact" className={styles.contactNameInput} id="contact-1-name" maxLength={50} />
+                                <input type="tel" name="phone3" placeholder="Phone number" className={styles.contactPhoneInput} id="contact-1-phone" maxLength={10} />
                                 <span />
                                 <span />
                                 <span />
