@@ -1,3 +1,5 @@
+@use "../../global.module.scss" as *;
+
 .preloader {
     position: fixed;
     width: 100%;
@@ -13,7 +15,7 @@
         display: flex;
         gap: 9px;
     }
-    
+
     .fontLoader {
         opacity: 0;
         :nth-child(1) {font-family: $titleFont;}
