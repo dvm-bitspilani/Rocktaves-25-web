@@ -86,9 +86,14 @@ export default function SingleScroller() {
 		// else bindObservers()
 		bindObservers()
 
+		const handleResize = () => {ScrollTrigger.refresh()}
+
+		window.addEventListener("resize", handleResize);
+
 		return () => {
 			// window.removeEventListener("scrollend", () => {bindObservers()} );
 			observer.disconnect();
+			window.removeEventListener("resize", handleResize);
 		}
 	}, []);
 
@@ -118,24 +123,24 @@ export default function SingleScroller() {
 		})
 	}, {dependencies: [locationRef.current?.pathname]})
 
-	useEffect(() => {
-		return;
-		const handleScrollEnd = () => {
-			let page = locationRef.current?.pathname.replace("/", "")
-			if (page === undefined) return
-			if (!pages.includes(page)) page = "home";
-			const target = pageRefs.current[page];
+	// useEffect(() => {
+	// 	return;
+	// 	const handleScrollEnd = () => {
+	// 		let page = locationRef.current?.pathname.replace("/", "")
+	// 		if (page === undefined) return
+	// 		if (!pages.includes(page)) page = "home";
+	// 		const target = pageRefs.current[page];
 
-			target?.scrollIntoView({
-				behavior: "smooth",
-				block: "nearest"
-			})
-		}
+	// 		target?.scrollIntoView({
+	// 			behavior: "smooth",
+	// 			block: "nearest"
+	// 		})
+	// 	}
 
-		pageContRef.current?.addEventListener("scrollend", handleScrollEnd);
+	// 	pageContRef.current?.addEventListener("scrollend", handleScrollEnd);
 
-		return () => {pageContRef.current?.removeEventListener("scrollend", handleScrollEnd)}
-	}, [])
+	// 	return () => {pageContRef.current?.removeEventListener("scrollend", handleScrollEnd)}
+	// }, [])
 
 	useEffect(() => {
 		locationRef.current = location;

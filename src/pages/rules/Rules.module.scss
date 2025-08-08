@@ -32,6 +32,7 @@
         font-family: $paraFont;
         color: $primaryColor;
         z-index: 10;
+        padding-bottom: calc(80vw*0.157);
 
         ol {
             display: flex;
