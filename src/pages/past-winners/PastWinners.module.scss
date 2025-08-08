@@ -4,7 +4,8 @@
 
 .pastWinnersPage {
     position: relative;
-    // min-height: calc(100vh - 108px);
+    min-height: $minPageHeight;
+    padding: 54px 0px;
     // background-color: black;
 
     .pwPageBg {
@@ -32,7 +33,7 @@
 
             @for $letterIndex from 1 through 12 {
                 span:nth-child(#{$letterIndex}) {
-                    $color: list.nth($titleColors, math.random(list.length($titleColors)));
+                    $color: list.nth($titleColors, $letterIndex);
                     color: $color;
                     // filter: drop-shadow(0px 0px 10px $color);
                 }
@@ -40,7 +41,7 @@
         };
 
         .pwGalleryContainer {
-            position: relative;
+            position: relative;//for the bottom image
 
             .pwGalleryBg {
                 position: absolute;

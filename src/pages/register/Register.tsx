@@ -46,7 +46,7 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                 const isValid = formInputPattern[key].test((formData[key] as string).toLowerCase());
                 if (!isValid && addNotif) {
                     if (key === "name" || key == "city") addNotif(`Please fill the band ${key}.`)
-                    else if (key === "number_of_members") addNotif(`Please fill the number of band members in your band.`)
+                    else if (key === "number_of_members") addNotif(`Please fill the number of band members in your band with numbers.`)
                     else if (key.includes("name")) addNotif("Please fill the contact names in the correct format: They can only contain alphabets, numbers or whitespace. Also the required contact fields cannot be blank.")
                     else if (key.includes("phone")) addNotif("Please fill the contact phone number in the correct format: They must be of 10 digits only. Also the required contact fields cannot be blank.")
                     else if (key === "email_address") addNotif("Please fill the email in the correct format.")
@@ -102,8 +102,8 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                     <h2 className={styles.infoTitle}>Band Info</h2>
                     <BandInfoInputField name="name" placeholder="Band Name" type="text" maxLength={50} />
                     <BandInfoInputField name="email_address" placeholder="Your Email" type="email" maxLength={254} />
-                    <BandInfoInputField name="number_of_members" placeholder="Number of Band Members" type="number" maxLength={4} />
-                    <BandInfoInputField name="music_since" placeholder="Year of Inception of Band" type="number" maxLength={4} />
+                    <BandInfoInputField name="number_of_members" placeholder="Number of Band Members" type="text" maxLength={4} />
+                    <BandInfoInputField name="music_since" placeholder="Year of Inception of Band" type="text" maxLength={4} />
                     <BandInfoInputField name="city" placeholder="City you're based in" type="text" maxLength={30} />
                     {/* <div className={styles.bandMemNumWrapper}>
                         <label htmlFor="memNum">Number of band members: </label>

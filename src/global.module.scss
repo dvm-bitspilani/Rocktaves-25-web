@@ -2,6 +2,7 @@ $titleFont: "TheRock", sans-serif;
 $secondaryFont: "RockSalt", sans-serif;
 $paraFont: "New Rocker", sans-serif;
 $bandNameFont: "Crazy Ivan", sans-serif;
+$minPageHeight: calc(100vh - 108px); //not applicable on hero/landing
 
 $breakPoint: 750px;
 
@@ -10,11 +11,15 @@ $titleColors: (
     #ff0000,
     #0000ff,
     #00ff00,
+    #64c4ff,
+    #1aff00,
+    #006aac,
     #ffff00,
     aqua,
     magenta,
-    rgb(255, 60, 0),
-    rgb(255, 0, 89)
+    #ff3c00,
+    #ffd700,
+    #ff0059
 );
 
 @font-face {
@@ -32,6 +37,10 @@ $titleColors: (
 @font-face {
     font-family: 'Crazy Ivan';
     src: url('./fonts/crazyivan.ttf') format('truetype');
+}
+
+@media (min-width: $breakPoint) {
+    $minPageHeight: calc(100vh - 48px)
 }
 
 :root {
