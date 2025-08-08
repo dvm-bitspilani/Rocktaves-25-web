@@ -76,6 +76,12 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
                     Array(5).fill(null).map((_, i) => <VerticalBar key={i} setOn={percentageLoaded >= (i + 1)*20} />)
                 }
             </div>
+            <div className={styles.fontLoader}>
+                <span>This</span>
+                <span>Is</span>
+                <span>Hidden</span>
+                <span>Don't discover it</span>
+            </div>
         </div>
     )
 }

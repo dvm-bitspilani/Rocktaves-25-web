@@ -99,7 +99,6 @@ export default function SingleScroller() {
 			scrollTrigger: {
 				trigger: pageContRef.current,
 				start: "top top",
-				markers: true,
 				scrub: 1, 
 				end: "bottom bottom",
 				snap: {
