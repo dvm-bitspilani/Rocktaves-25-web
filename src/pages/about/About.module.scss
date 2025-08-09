@@ -38,6 +38,8 @@
             line-height: 1.8rem;
             font-family: $paraFont;
             color: $primaryColor;
+            margin: 0px;
+
 
             @for $i from 2 through 6 {
                 span:nth-child(#{$i}) {

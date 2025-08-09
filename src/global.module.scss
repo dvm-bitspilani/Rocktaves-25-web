@@ -12,12 +12,12 @@ $titleColors: (
     #0000ff,
     #00ff00,
     #64c4ff,
-    #1aff00,
+    #ff3c00,
     #006aac,
     #ffff00,
     aqua,
     magenta,
-    #ff3c00,
+    #1aff00,
     #ffd700,
     #ff0059
 );
@@ -50,4 +50,8 @@ $titleColors: (
 body {
     margin: 0px;
     width: calc(100vw - (100vw - 100%));
+}
+
+* {
+    user-select: none;
 }

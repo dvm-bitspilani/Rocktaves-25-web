@@ -71,6 +71,10 @@
                     gap: 45px 36px;
                     flex-wrap: wrap;
 
+                    @media (max-width: $breakPoint) {
+                        // gap: 45px 0px;
+                        justify-content: center;
+                    }
                     .venueSelectWrapper {
                         input {
                             display: none;
@@ -279,7 +283,6 @@
         }
     }
 }
-
 
 .bandInfoInputWrapper {
     position: relative;
