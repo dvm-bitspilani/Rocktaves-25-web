@@ -113,7 +113,7 @@ export default function SingleScroller() {
 						const currentScrollPos = document.scrollingElement.scrollTop;
 						const vpRelPageTop = page.getBoundingClientRect().top;
 						const posRatio = (vpRelPageTop + currentScrollPos)/totalScrollHeight;
-						console.log(posRatio)
+						// const posRatioBottom = ()
 						return posRatio >= 0 ? posRatio : 0;
 					}).filter(posRatio => posRatio !== -1),
 					ease: "sine.inOut",
