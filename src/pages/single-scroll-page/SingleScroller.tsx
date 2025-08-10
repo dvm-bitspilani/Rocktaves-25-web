@@ -7,14 +7,9 @@ import { Rules } from '../rules/Rules'
 import { Timeline } from '../timeline/Timeline'
 import styles from './SingleScroller.module.scss'
 import { useRef, useEffect } from 'react'
-import type { Location } from 'react-router'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-// import gsap from 'gsap';
-// import { useGSAP } from '@gsap/react'
-// import { ScrollTrigger } from 'gsap/ScrollTrigger'
-// import Preloader from '../preloader/Preloader'
 
 const pages = [
 	"home",
@@ -29,7 +24,7 @@ export default function SingleScroller() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const initialScrollOver = useRef(["/home", "/"].includes(location.pathname));
-	const locationRef = useRef<Location>(null);
+	// const locationRef = useRef<Location>(null);
 	const pageRefs = useRef<Record<(typeof pages)[number], HTMLDivElement | null>>({});
 	const pageContRef = useRef<HTMLDivElement>(null);
 	const setPageRef = (page: (typeof pages)[number]) => {
@@ -47,19 +42,6 @@ export default function SingleScroller() {
 			block: "start"
 		})
 	}
-
-	// useEffect(() => {
-	// 	return;
-	// 	let targetPage = location.pathname.replace("/", "");
-		
-	// 	if (!pages.includes(targetPage)) navigate("/");
-	// 	else if (pageRefs.current[targetPage]) 
-	// 		pageRefs.current[targetPage]?.scrollIntoView({
-	// 			behavior: "smooth",
-	// 			block: "start"
-	// 		})
-
-	// }, [location.pathname]);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -118,33 +100,11 @@ export default function SingleScroller() {
 					}).filter(posRatio => posRatio !== -1),
 					ease: "sine.inOut",
 					duration: 1,
+					directional: false,
 				},
 			}
 		})
-	}, {dependencies: [locationRef.current?.pathname]})
-
-	// useEffect(() => {
-	// 	return;
-	// 	const handleScrollEnd = () => {
-	// 		let page = locationRef.current?.pathname.replace("/", "")
-	// 		if (page === undefined) return
-	// 		if (!pages.includes(page)) page = "home";
-	// 		const target = pageRefs.current[page];
-
-	// 		target?.scrollIntoView({
-	// 			behavior: "smooth",
-	// 			block: "nearest"
-	// 		})
-	// 	}
-
-	// 	pageContRef.current?.addEventListener("scrollend", handleScrollEnd);
-
-	// 	return () => {pageContRef.current?.removeEventListener("scrollend", handleScrollEnd)}
-	// }, [])
-
-	useEffect(() => {
-		locationRef.current = location;
-	}, [location.pathname])
+	}, {dependencies: [location.pathname]})
 
 	return (
 		<>
