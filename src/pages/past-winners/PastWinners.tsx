@@ -20,7 +20,8 @@ export const PastWinners = forwardRef<HTMLDivElement>((_, ref) => {
 
         imgRefs.current.forEach((img, i) => {
             gsap.from(img, {
-                x: `+=${-90 + (60*i)}`,
+                // x: `+=${-90 + (60*i)}`,
+                "--deviation": `+=${-90 + (60*i)}px`,
                 opacity: 0,
                 scrollTrigger: {
                     trigger: pwGalleryRef.current,
