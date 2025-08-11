@@ -61,12 +61,12 @@ export default function SingleScroller() {
 			initialScrollOver.current = true;
 		}
 
-		// if (!initialScrollOver.current) {
-		// 	// window.addEventListener("scrollend", () => {bindObservers()}, {once: true});
-		// 	const target = location.pathname.replace("/", "");
-		// 	if (pages.includes(target)) scrollToPage(target)
-		// 	else navigate("/")
-		// }
+		if (!initialScrollOver.current) {
+			// window.addEventListener("scrollend", () => {bindObservers()}, {once: true});
+			const target = location.pathname.replace("/", "");
+			if (pages.includes(target)) scrollToPage(target)
+			else navigate("/")
+		}
 		// else bindObservers()
 		bindObservers()
 
@@ -82,6 +82,7 @@ export default function SingleScroller() {
 	}, []);
 
 	useGSAP(() => {
+		return
 		gsap.registerPlugin(ScrollTrigger)
 		gsap.timeline({
 			// onUpdate: () => console.log("heyyy"),
