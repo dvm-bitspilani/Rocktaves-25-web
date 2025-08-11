@@ -27,6 +27,7 @@ export default function SingleScroller() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const initialScrollOver = useRef(["/home", "/"].includes(location.pathname));
+	const numberOfRenders = useRef<number>(0);
 	// const locationRef = useRef<Location>(null);
 	const pageRefs = useRef<Record<(typeof pages)[number], HTMLDivElement | null>>({});
 	const pageContRef = useRef<HTMLDivElement>(null);
@@ -90,7 +91,10 @@ export default function SingleScroller() {
 	}, []);
 
 	useGSAP(() => {
-	
+		if (numberOfRenders.current++ < 2) {
+			console.log(numberOfRenders.current)
+			return;
+		}
 		gsap.registerPlugin(ScrollTrigger)
 		gsap.timeline({
 			// onUpdate: () => console.log("heyyy"),

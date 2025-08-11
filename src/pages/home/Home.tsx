@@ -31,7 +31,7 @@ export const Home = forwardRef<HTMLDivElement, {scrollToPage: (page: string) => 
 			},
 			ease: "power1.in"
 		})
-		console.log(headingCharsRef.current)
+		// console.log(headingCharsRef.current)
 		const maxDisplacement = 0
 		headingCharsRef.current?.forEach((char, i) => {
 			gsap.to(char, {

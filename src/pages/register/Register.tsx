@@ -82,7 +82,7 @@ export default function Register({setIsLoading}: {setIsLoading: React.Dispatch<R
                 if (response.data.status === "1") addNotif("You've been successfully registered for Rocktaves 2025.")
                 else addNotif(`Please fill the details correctly: ${response.data.message}`)
             }
-                console.log(response)
+                // console.log(response)
         }).catch(() => {
             if (addNotif) addNotif("Something went wrong, your registration could not be completed.")
         })

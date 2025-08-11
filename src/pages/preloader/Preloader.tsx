@@ -25,7 +25,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
         }
 
         const timeOut = setTimeout(() => {
-            console.log(addNotifRef.current, appStates?.addNotif)
+            // console.log(addNotifRef.current, appStates?.addNotif)
             if (addNotifRef.current) addNotifRef.current("Loading time limit exceeded, some assets may not be loaded properly. This could be due to slow network speeds.")
             setIsLoading(false)
         }, timeLimit*1000)
@@ -66,7 +66,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
 
     useEffect(() => {
         addNotifRef.current = appStates?.addNotif;
-        console.log(addNotifRef.current)
+        // console.log(addNotifRef.current)
     }, [appStates])
 
     useEffect(() => {
