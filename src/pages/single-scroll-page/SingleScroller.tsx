@@ -6,10 +6,11 @@ import { PastWinners } from '../past-winners/PastWinners'
 import { Rules } from '../rules/Rules'
 import { Timeline } from '../timeline/Timeline'
 import styles from './SingleScroller.module.scss'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useContext } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { AppContext } from '../../App'
 
 const pages = [
 	"home",
@@ -37,6 +38,13 @@ export default function SingleScroller() {
 			}
 		}
 	}
+
+	const {appStates} = useContext(AppContext)
+	const addNotifRef = useRef<(message: string) => void>(null);
+
+	useEffect(() => {
+		if (appStates?.addNotif) addNotifRef.current = appStates.addNotif;
+	}, [appStates])
 
 	const scrollToPage = (page: string) => {
 		pageRefs.current[page]?.scrollIntoView({
@@ -82,7 +90,7 @@ export default function SingleScroller() {
 	}, []);
 
 	useGSAP(() => {
-		return
+	
 		gsap.registerPlugin(ScrollTrigger)
 		gsap.timeline({
 			// onUpdate: () => console.log("heyyy"),
@@ -92,15 +100,19 @@ export default function SingleScroller() {
 				scrub: 1, 
 				end: "bottom bottom",
 				snap: {
-					snapTo: Object.values(pageRefs.current).map((page) => {
-						if (!page || !document.scrollingElement) return -1;
-						const totalScrollHeight = ScrollTrigger.maxScroll(document.scrollingElement as HTMLElement);
-						const currentScrollPos = document.scrollingElement.scrollTop;
-						const vpRelPageTop = page.getBoundingClientRect().top;
-						const posRatio = (vpRelPageTop + currentScrollPos)/totalScrollHeight;
-						// const posRatioBottom = ()
-						return posRatio >= 0 ? posRatio : 0;
-					}).filter(posRatio => posRatio !== -1),
+					snapTo: (() => {
+						const snapPoints = Object.values(pageRefs.current).map((page) => {
+							if (!page || !document.scrollingElement) return -1;
+							const totalScrollHeight = ScrollTrigger.maxScroll(document.scrollingElement as HTMLElement);
+							const currentScrollPos = document.scrollingElement.scrollTop;
+							const vpRelPageTop = page.getBoundingClientRect().top;
+							const posRatio = (vpRelPageTop + currentScrollPos)/totalScrollHeight;
+							// const posRatioBottom = ()
+							return posRatio >= 0 ? posRatio : 0;
+						}).filter(posRatio => posRatio !== -1);
+						if (addNotifRef.current) addNotifRef.current(snapPoints.toString().replace(/,/g, " "))
+						return snapPoints;
+					})(),
 					ease: "sine.inOut",
 					duration: 1,
 					directional: false,
