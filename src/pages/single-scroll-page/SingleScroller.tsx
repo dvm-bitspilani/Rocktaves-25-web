@@ -20,6 +20,8 @@ const pages = [
 	"contact"
 ]
 
+// history.scrollRestoration = "manual";
+
 export default function SingleScroller() {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -59,12 +61,12 @@ export default function SingleScroller() {
 			initialScrollOver.current = true;
 		}
 
-		if (!initialScrollOver.current) {
-			// window.addEventListener("scrollend", () => {bindObservers()}, {once: true});
-			const target = location.pathname.replace("/", "");
-			if (pages.includes(target)) scrollToPage(target)
-			else navigate("/")
-		}
+		// if (!initialScrollOver.current) {
+		// 	// window.addEventListener("scrollend", () => {bindObservers()}, {once: true});
+		// 	const target = location.pathname.replace("/", "");
+		// 	if (pages.includes(target)) scrollToPage(target)
+		// 	else navigate("/")
+		// }
 		// else bindObservers()
 		bindObservers()
 
