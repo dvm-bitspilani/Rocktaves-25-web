@@ -6,11 +6,10 @@ import { PastWinners } from '../past-winners/PastWinners'
 import { Rules } from '../rules/Rules'
 import { Timeline } from '../timeline/Timeline'
 import styles from './SingleScroller.module.scss'
-import { useRef, useEffect, useContext } from 'react'
+import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { AppContext } from '../../App'
 
 const pages = [
 	"home",
@@ -40,12 +39,12 @@ export default function SingleScroller() {
 		}
 	}
 
-	const {appStates} = useContext(AppContext)
-	const addNotifRef = useRef<(message: string) => void>(null);
+	// const {appStates} = useContext(AppContext)
+	// const addNotifRef = useRef<(message: string) => void>(null);
 
-	useEffect(() => {
-		if (appStates?.addNotif) addNotifRef.current = appStates.addNotif;
-	}, [appStates])
+	// useEffect(() => {
+	// 	if (appStates?.addNotif) addNotifRef.current = appStates.addNotif;
+	// }, [appStates])
 
 	const scrollToPage = (page: string) => {
 		pageRefs.current[page]?.scrollIntoView({
@@ -114,7 +113,7 @@ export default function SingleScroller() {
 							// const posRatioBottom = ()
 							return posRatio >= 0 ? posRatio : 0;
 						}).filter(posRatio => posRatio !== -1);
-						if (addNotifRef.current) addNotifRef.current(snapPoints.toString().replace(/,/g, " "))
+						// if (addNotifRef.current) addNotifRef.current(snapPoints.toString().replace(/,/g, " "))
 						return snapPoints;
 					})(),
 					ease: "sine.inOut",
