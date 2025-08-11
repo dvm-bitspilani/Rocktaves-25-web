@@ -1,5 +1,12 @@
-const assetList = {
-    'images': [
+const isOpera = /Opera|OPR/.test(navigator.userAgent);
+
+interface assetType {
+    images: string[],
+    videos: string[]
+}
+
+const assetList:assetType = {
+    images: [
         // './images/about/concert-bg.png',
         './images/about/drums.png',
         './images/home/home-bg-overlay.png',
@@ -21,9 +28,12 @@ const assetList = {
         './images/winners/them-clones.png',
         // './images/winners/visualizer.png',
     ],
-    "videos": [
-        "./videos/ROCTAVES_BG_VIDEO.mp4"
+    videos: [
+        // "./videos/ROCTAVES_BG_VIDEO.mp4"
     ]
 }
+
+if (isOpera) assetList.images.push("./images/thumb.png")
+else assetList.videos.push("./videos/ROCTAVES_BG_VIDEO.mp4");
 
 export default assetList;

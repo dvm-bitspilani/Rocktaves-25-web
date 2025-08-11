@@ -38,6 +38,7 @@ export default function SingleScroller() {
 			}
 		}
 	}
+	const isOpera = /Opera|OPR/.test(navigator.userAgent);
 
 	// const {appStates} = useContext(AppContext)
 	// const addNotifRef = useRef<(message: string) => void>(null);
@@ -129,9 +130,13 @@ export default function SingleScroller() {
 			{/* {isLoading ? <Preloader setIsLoading={setIsLoading} /> : null} */}
 			<div className={styles.singleScroller}>
 				<div className={styles.ssBg}>
-					<video className={styles.bgVideo} autoPlay loop muted>
-						<source src="/videos/ROCTAVES_BG_VIDEO.mp4" type="video/mp4" />
-					</video>
+					{
+						isOpera ?
+						<img className={styles.bgImage} src="/images/thumb.png" />
+						: <video className={styles.bgVideo} autoPlay loop muted>
+							<source src="/videos/ROCTAVES_BG_VIDEO.mp4" type="video/mp4" />
+						</video>
+					}
 				</div>
 				<div className={styles.pageContainer} ref={pageContRef}>
 					<Home scrollToPage={scrollToPage} ref={setPageRef(pages[0])} />
