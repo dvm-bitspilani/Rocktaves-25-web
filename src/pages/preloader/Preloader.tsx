@@ -10,6 +10,7 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
     const hasRunOnce = useRef<boolean>(false);
     const preloaderRef = useRef<HTMLDivElement>(null);
     const { appStates } = useContext(AppContext);
+    const addNotifRef = useRef<(message: string) => void>(appStates?.addNotif);
     const [percentageLoaded, setPercentageLoaded] = useState<number>(0);
     const numOfAssets = Object.values(assetList).reduce((sum, arr) => sum + arr.length, 0);
 
@@ -24,7 +25,8 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
         }
 
         const timeOut = setTimeout(() => {
-            if (appStates?.addNotif) appStates.addNotif("Loading time limit exceeded, some assets may not be loaded properly. This could be due to slow network speeds.")
+            console.log(addNotifRef.current, appStates?.addNotif)
+            if (addNotifRef.current) addNotifRef.current("Loading time limit exceeded, some assets may not be loaded properly. This could be due to slow network speeds.")
             setIsLoading(false)
         }, timeLimit*1000)
 
@@ -63,10 +65,22 @@ export default function Preloader({ setIsLoading }: { setIsLoading: React.Dispat
     }
 
     useEffect(() => {
+        addNotifRef.current = appStates?.addNotif;
+        console.log(addNotifRef.current)
+    }, [appStates])
+
+    useEffect(() => {
 		if (hasRunOnce.current) return;
 		hasRunOnce.current = true;
 
+        const handleUnload =  () => {window.scrollTo(0, 0)}
+
         cacheAssets();
+        window.addEventListener("unload", handleUnload);
+
+        return () => {
+            window.removeEventListener("unload", handleUnload);
+        }
     }, [])
 
     return (
