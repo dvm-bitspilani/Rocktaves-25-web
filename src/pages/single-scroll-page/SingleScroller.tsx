@@ -91,7 +91,7 @@ export default function SingleScroller() {
 	}, []);
 
 	useGSAP(() => {
-		if (numberOfRenders.current++ < 2) {
+		if (numberOfRenders.current++ < 1) {
 			console.log(numberOfRenders.current)
 			return;
 		}
