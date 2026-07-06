@@ -23,12 +23,12 @@ export const AboutUs = forwardRef<HTMLDivElement>((_, ref) => {
             </h2>
             <div className={styles.contactUsContent}>
                 <div className={styles.contactItem}>
-                    <div className={styles.contactName}>Kuhoo Sathe</div>
-                    <div className={styles.contactNum}>+91 9224770487</div>
+                    <div className={styles.contactName}>Tanvi Gangakhedkar</div>
+                    <div className={styles.contactNum}>+91 9967851131</div>
                 </div>
                 <div className={styles.contactItem}>
-                    <div className={styles.contactName}>Yash Sahoo</div>
-                    <div className={styles.contactNum}>+91 9999889867</div>
+                    <div className={styles.contactName}>Achal Gupta</div>
+                    <div className={styles.contactNum}>+91 9669190002</div>
                 </div>
             </div>
         </div>

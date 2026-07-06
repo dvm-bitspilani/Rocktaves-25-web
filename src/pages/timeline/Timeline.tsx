@@ -30,10 +30,10 @@ export const Timeline = forwardRef<HTMLDivElement>((_, ref) => {
                 </div>
                 <div className={styles.stepContainer}>
                     <div className={styles.stepTitle}>
-                        <span>Step 3</span> - Finals at Oasis '25
+                        <span>Step 3</span> - Finals at Oasis '26
                     </div>
                     <div className={styles.stepText}>
-                        The finalists will be invited to play at Oasis, the annual cultural fest of BITS Pilani. The winning band will walk away with the title of the Rocktaves Winner for the 53rd edition of Oasis and other prizes.
+                        The finalists will be invited to play at Oasis, the annual cultural fest of BITS Pilani. The winning band will walk away with the title of the Rocktaves Winner for the 54th edition of Oasis and other prizes.
                     </div>
                 </div>
 			</div>
